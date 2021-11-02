@@ -19,9 +19,7 @@ int main()
 
   while(exit == 0)
     {
-      printf("---------------------\nType word to tokenize, ![desired id number] to"
-
-	     " view a specific existing word, or e to exit:\n");
+      printf("\nType word to tokenize or e to exit:\n");
       fgets(word, STRING_SIZE, stdin);
       if(word[0] == 'e')
 	{
