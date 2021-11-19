@@ -43,20 +43,16 @@ int main()
 
 	  output = word_terminator(word);
 
-	  printf("End of Word: %c\n", *output);
-	  word_count = count_words(word);
-
 	  printf("Number of words: %d\n", word_count);
 	  // Return a copy of word from (0,len)given len.
-
 	  output = copy_str(p, 4);
+	  
 	  //printing tokens
 	  printf("New word copy: %s\n", output);
 	  tokenizer = tokenize(word);
 	  printf("tokens\n");
-
 	  print_tokens(tokenizer);
-	  add_history(test_list, word);
+	  add_history(test_list, "fill this in");
 	  
 	  printf("History\n");
 	  print_history(test_list);

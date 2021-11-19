@@ -3,82 +3,74 @@
 #include "history.h"
 #include "tokenizer.h"
 
+List *init_history()
 
-/* Initialize the linked list to keep the history. */
-List* init_history()
 {
-  List *history;
-  history = (List*)malloc(sizeof(List));
-  return history;
+  List *list = malloc( sizeof( List));
+  list -> root = malloc( sizeof( Item));
+  return list;
 }
 
-/* Add a history item to the end of the list.
-   List* list - the linked list
-   char* str - the string to store
-*/
 void add_history(List *list, char *str)
 {
-  Item *new = malloc(sizeof(Item));
-  if(list->root == NULL)
-    {
-      new->id = 1;
-      list->root = new;
-    }
-  else
-    {
-      Item *temp = list->root;
-      while(temp != NULL)
-	{
-	  temp = temp->next;
-	}
-      temp = new;
-    }
-  new -> str = str;
-  new -> next = NULL;
+  int pos = 1;
+  Item *temp = list->root;
+  while(temp){
+    temp = temp->next;
+    pos++;
+  }
+  temp=malloc(sizeof(Item));
+  temp->id = pos;
+  temp->str = str;
 }
 
-/* Retrieve the string stored in the node where Item->id == id.
-   List* list - the linked list
-   int id - the id of the Item to find */
 char *get_history(List *list, int id)
 {
-  if (list ->root == NULL)
-    {
-      return "empty";
+  Item *tmp;
+  if(!list){
+    return '\0';
+  }
+  else{
+    tmp = list->root;
+    while(tmp){
+      if(tmp->id == id){
+	return tmp->str;
+      }
+      tmp = tmp->next;
     }
-  else
-    {
-      Item *temp = list->root;
-      while(temp != NULL)
-	{
-	  if(temp->id == id)
-	    {
-	      return temp->str;
-	    }
-	  temp = temp -> next;
-	}
-    }
-  return "Nothing";
+    return '\0';
+  }
 }
 
-/*Print the entire contents of the list. */
+
+
 void print_history(List *list)
 {
-  Item *temp = list->root;
-  while(temp != NULL)
-    { 
-      printf("History Item [%d]: %s \n", temp->id, temp->str);
-      temp = temp -> next;
+  if (list == NULL){
+    printf("History is empty, please enter some sentences.\n");
+  }
+  else{
+    Item *tmp = list->root;
+    int i = 0;
+    while(tmp){
+      printf("%d: %s\n",tmp->id,tmp->str);
+      tmp->next;
+      i++;
     }
+    printf("\n");
+  }
 }
 
-/*Free the history list and the strings it references. */
+
+
 void free_history(List *list)
 {
-  while(list -> root != NULL)
-    {
-      free(list -> root -> str);
-      list->root = list->root -> next;
-    }
-  free(list);
+  Item *tmp;
+  Item *head = list->root;
+  while(head){
+    tmp = head;
+    head = head->next;
+    free(tmp);
+  }
 }
+
