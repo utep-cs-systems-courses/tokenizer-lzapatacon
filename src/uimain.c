@@ -52,7 +52,7 @@ int main()
 	  tokenizer = tokenize(word);
 	  printf("tokens\n");
 	  print_tokens(tokenizer);
-	  add_history(test_list, "fill this in");
+	  add_history(test_list, *tokenizer);
 	  
 	  printf("History\n");
 	  print_history(test_list);
