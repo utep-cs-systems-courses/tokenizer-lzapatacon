@@ -6,7 +6,7 @@
 List *init_history()
 
 {
-  List *list = malloc( sizeof( List));
+  List *list = malloc(sizeof( List));
   list -> root = malloc( sizeof( Item));
   return list;
 }
@@ -21,8 +21,8 @@ void add_history(List *list, char *str)
     pos++;
   }
   temp->next = newItem;
-  temp->next->str = str;
-  temp->next->id =  temp->id + 1;
+  temp->next-> str = str;
+  temp->next-> id = pos;
 }
 
 char *get_history(List *list, int id)
@@ -55,7 +55,7 @@ void print_history(List *list)
     int i = 0;
     while(tmp != NULL){
       printf("%d: %s\n",tmp->id,tmp->str);
-      tmp->next;
+      tmp = tmp->next;
       i++;
     }
     printf("\n");
