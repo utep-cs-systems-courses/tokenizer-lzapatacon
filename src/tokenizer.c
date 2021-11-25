@@ -4,24 +4,17 @@
 #include "history.h"
 
 int space_char(char c)
-
 {
-
   if (( c == ' '|| c == '\t')&&c!='\0' ){//checks if space or tab
     return 1;
   }
   return 0;
 }
-
 int non_space_char(char c)
 {
-
   if ((c==' '||c=='\t') || c== '\0' ){//checks if space or tab
-
     return 0;
-
   }
-
   return 1;
 }
 char *word_start(char *word)
@@ -78,9 +71,6 @@ char *copy_str(char *inStr, short len)
   return copyStr;
 
 }
-
-
-
 char **tokenize(char *str)
 {
   int size = count_words(str);
@@ -88,17 +78,16 @@ char **tokenize(char *str)
   int i;
   int length;
   char *p = str;
-  for(i = 0;i < size;i++){
+  for(i = 0; i < size; i++){
     p = word_start(p);
-    length = sizeof(p);
-    tokens[i] = copy_str(p, length);
+    char *f = word_start(p);
+    char *e = word_terminator(p);
+    tokens[i] = copy_str(p,e-f);
     p = word_terminator(p);
   }
   tokens[i] = '\0';
   return tokens;
 }
-
-
 
 void print_tokens(char **tokens)
 {

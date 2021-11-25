@@ -3,11 +3,12 @@
 #include "tokenizer.h"
 #include "history.h"
 
+
 #define STRING_SIZE 100
 
 int main()
 {
-  char userinput[STRING_SIZE], word[STRING_SIZE];
+  char userinput[STRING_SIZE], word[STRING_SIZE], word2[STRING_SIZE];
   char *p, *output, **tokenizer;
   int is_space, is_non_space, word_count, exit;
 
@@ -42,6 +43,7 @@ int main()
 	  printf("Start of word: %c\n", *output);
 
 	  output = word_terminator(word);
+	  word_count = count_words(word);
 
 	  printf("Number of words: %d\n", word_count);
 	  // Return a copy of word from (0,len)given len.
@@ -52,10 +54,24 @@ int main()
 	  tokenizer = tokenize(word);
 	  printf("tokens\n");
 	  print_tokens(tokenizer);
-	  add_history(test_list, *tokenizer);
+
+	  //printf("Token[%d] = %s\n", 0, tokenizer[0]);
+	  
+	  
+	  add_history(test_list, word);
+   
+	  //add_history(test_list, *tokenizer);
 	  
 	  printf("History\n");
+	  
 	  print_history(test_list);
+	  printf("Enter second test sentence\n");
+	  fgets(word2, 100, stdin);
+	  add_history(test_list, word2);
+	  print_history(test_list);
+
+	  printf("History at %d, %s",2,get_history(test_list,2));
+	  
 	  free_tokens(tokenizer);
 	}
     }
